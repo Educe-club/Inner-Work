@@ -1,172 +1,155 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2113.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inner Work Stories</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; background-color: #f8f9fa; }
+        .sidebar { width: 20%; padding: 20px; background: #343a40; color: white; text-align: left; }
+        .sidebar h2 { text-align: center; }
+        .sidebar button { 
+            display: block; 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 5px; 
+            cursor: pointer; 
+            text-align: left; 
+            background-color: #495057; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+        }
+        .sidebar button:hover { background-color: #6c757d; }
+        .content { width: 80%; text-align: center; padding: 20px; }
+        .video-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px;
+        }
+        .video-item { 
+            width: 23%; 
+            background: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .video-item:hover { transform: scale(1.05); }
+        .video-title { font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+        .video-tags { font-size: 0.9em; color: gray; margin-top: 10px; }
+        .search-container { margin-bottom: 20px; }
+        .search-container input { 
+            padding: 10px; 
+            width: 60%; 
+            border-radius: 5px; 
+            border: 1px solid #ced4da;
+        }
+        iframe { width: 100%; height: 200px; border-radius: 5px; }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Inner Work Stories&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body { font-family: Arial, sans-serif; display: flex; background-color: #f8f9fa; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.sidebar { width: 20%; padding: 20px; background: #343a40; color: white; text-align: left; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.sidebar h2 { text-align: center; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.sidebar button {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: block;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 10px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: left;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #495057;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 5px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.sidebar button:hover { background-color: #6c757d; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.content { width: 80%; text-align: center; padding: 20px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.video-container {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: center;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.video-item {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 23%;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: white;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.video-item:hover { transform: scale(1.05); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.video-title { font-weight: bold; margin-bottom: 10px; font-size: 16px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.video-tags { font-size: 0.9em; color: gray; margin-top: 10px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.search-container { margin-bottom: 20px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.search-container input {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 10px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 60%;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 5px;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #ced4da;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>iframe { width: 100%; height: 200px; border-radius: 5px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="sidebar"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Topics&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="topicList"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="content"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h1 style="color: #343a40;"&gt;Inner Work Stories&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2 style="color: #6c757d; font-weight: normal;"&gt;Real stories of transformation and personal growth through inner work.&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="search-container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="video-container" id="videoList"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const videos = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>fitness: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Morning Workout", url: "https://www.youtube.com/embed/LXb3EKWsInQ", tags: ["Fitness", "Health"], date: "2024-02-25" },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Fitness Tips", url: "https://www.youtube.com/embed/wZZ7oFKsKzY", tags: ["Fitness", "Wellness"], date: "2024-02-20" }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>music: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Latin Hits", url: "https://www.youtube.com/embed/kJQP7kiw5Fk", tags: ["Music", "Latin"], date: "2024-02-22" },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Top Charts", url: "https://www.youtube.com/embed/09R8_2nJtjg", tags: ["Music", "Pop"], date: "2024-02-18" }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>tech: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "Tech Talk 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", tags: ["Technology", "AI"], date: "2024-02-23" },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ title: "AI and Future", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ", tags: ["Technology", "Future"], date: "2024-02-15" }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>]</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function loadVideos(topic) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>history.pushState({ topic }, "", `?topic=${topic}`); // Updates the URL dynamically</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>displayVideos(videos[topic]);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function displayVideos(videoArray) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const videoList = document.getElementById("videoList");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>videoList.innerHTML = "";</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>videoArray.sort((a, b) =&gt; new Date(b.date) - new Date(a.date));</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>videoArray.forEach(video =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let videoItem = document.createElement("div");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>videoItem.classList.add("video-item");</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let title = document.createElement("div");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>title.classList.add("video-title");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>title.innerText = video.title;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let iframe = document.createElement("iframe");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>iframe.src = video.url;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>iframe.allowFullscreen = true;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let tags = document.createElement("div");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>tags.classList.add("video-tags");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>tags.innerText = "Tags: " + video.tags.join(", ");</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>videoItem.appendChild(title);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>videoItem.appendChild(iframe);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>videoItem.appendChild(tags);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>videoList.appendChild(videoItem);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function searchVideos() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let query = document.getElementById("searchInput").value.toLowerCase();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let filteredVideos = [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let category in videos) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>filteredVideos = filteredVideos.concat(videos[category].filter(video =&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>video.title.toLowerCase().includes(query) ||<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>video.tags.some(tag =&gt; tag.toLowerCase().includes(query))</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>displayVideos(filteredVideos);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function displayTopics() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const topicList = document.getElementById("topicList");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>topicList.innerHTML = "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let topics = Object.keys(videos).sort();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>topics.forEach(topic =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let button = document.createElement("button");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>button.innerText = topic.charAt(0).toUpperCase() + topic.slice(1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>button.onclick = () =&gt; loadVideos(topic);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>topicList.appendChild(button);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.onload = function() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>displayTopics();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const urlParams = new URLSearchParams(window.location.search);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const topic = urlParams.get("topic");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (topic &amp;&amp; videos[topic]) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>loadVideos(topic);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>let allVideos = Object.values(videos).flat();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>displayVideos(allVideos);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <div class="sidebar">
+        <h2>Topics</h2>
+        <div id="topicList"></div>
+    </div>
+    <div class="content">
+        <h1 style="color: #343a40;">Inner Work Stories</h1>
+        <h2 style="color: #6c757d; font-weight: normal;">Real stories of transformation and personal growth through inner work.</h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
+        </div>
+        <div class="video-container" id="videoList"></div>
+    </div>
+
+    <script>
+        const videos = {
+            fitness: [
+                { title: "Morning Workout", url: "https://www.youtube.com/embed/LXb3EKWsInQ", tags: ["Fitness", "Health"], date: "2024-02-25" },
+                { title: "Fitness Tips", url: "https://www.youtube.com/embed/wZZ7oFKsKzY", tags: ["Fitness", "Wellness"], date: "2024-02-20" }
+            ],
+            music: [
+                { title: "Latin Hits", url: "https://www.youtube.com/embed/kJQP7kiw5Fk", tags: ["Music", "Latin"], date: "2024-02-22" },
+                { title: "Top Charts", url: "https://www.youtube.com/embed/09R8_2nJtjg", tags: ["Music", "Pop"], date: "2024-02-18" }
+            ],
+            tech: [
+                { title: "Tech Talk 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", tags: ["Technology", "AI"], date: "2024-02-23" },
+                { title: "AI and Future", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ", tags: ["Technology", "Future"], date: "2024-02-15" }
+            ]
+        };
+        
+        function loadVideos(topic) {
+            history.pushState({ topic }, "", `?topic=${topic}`); // Updates the URL dynamically
+            displayVideos(videos[topic]);
+        }
+        
+        function displayVideos(videoArray) {
+            const videoList = document.getElementById("videoList");
+            videoList.innerHTML = "";
+            
+            videoArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            videoArray.forEach(video => {
+                let videoItem = document.createElement("div");
+                videoItem.classList.add("video-item");
+                
+                let title = document.createElement("div");
+                title.classList.add("video-title");
+                title.innerText = video.title;
+                
+                let iframe = document.createElement("iframe");
+                iframe.src = video.url;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                let tags = document.createElement("div");
+                tags.classList.add("video-tags");
+                tags.innerText = "Tags: " + video.tags.join(", ");
+                
+                videoItem.appendChild(title);
+                videoItem.appendChild(iframe);
+                videoItem.appendChild(tags);
+                videoList.appendChild(videoItem);
+            });
+        }
+        
+        function searchVideos() {
+            let query = document.getElementById("searchInput").value.toLowerCase();
+            let filteredVideos = [];
+            for (let category in videos) {
+                filteredVideos = filteredVideos.concat(videos[category].filter(video => 
+                    video.title.toLowerCase().includes(query) || 
+                    video.tags.some(tag => tag.toLowerCase().includes(query))
+                ));
+            }
+            displayVideos(filteredVideos);
+        }
+        
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = Object.keys(videos).sort();
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic.charAt(0).toUpperCase() + topic.slice(1);
+                button.onclick = () => loadVideos(topic);
+                topicList.appendChild(button);
+            });
+        }
+
+        window.onload = function() {
+            displayTopics();
+            const urlParams = new URLSearchParams(window.location.search);
+            const topic = urlParams.get("topic");
+
+            if (topic && videos[topic]) {
+                loadVideos(topic);
+            } else {
+                let allVideos = Object.values(videos).flat();
+                displayVideos(allVideos);
+            }
+        };
+    </script>
 </body>
 </html>
