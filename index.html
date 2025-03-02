@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,43 +11,25 @@
         body { 
             font-family: 'Arial', sans-serif; 
             display: flex; 
-            flex-direction: column;
-            background: linear-gradient(to right, #000000, #1a1a1a);
+            background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'), linear-gradient(to right, #141E30, #243B55); /* Textured Background with Gradient */
             color: white;
             position: relative;
-            align-items: center;
-        }
-        .header {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: #000000;
-            border-bottom: 3px solid #ffffff33;
-        }
-        .container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
         }
         .sidebar {
-            width: 15%; 
-            max-height: 80vh; /* Ensure scrolling only if needed */
-            overflow-y: auto; /* Enables scroll if topics exceed height */
+            width: 20%; 
             padding: 20px; 
             background: rgba(52, 58, 64, 0.9); 
             color: white; 
-            text-align: left; position: fixed; left: 0; top: 100px; height: calc(100vh - 100px); 
+            text-align: left; 
             border-right: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
         }
-        .sidebar h2 { text-align: left; margin-bottom: 15px; }
+        .sidebar h2 { text-align: center; margin-bottom: 15px; }
         .sidebar button { 
             display: flex; 
             align-items: center;
             width: 100%; 
-            padding: 10px; 
+            padding: 12px; 
             margin-bottom: 8px; 
             cursor: pointer; 
             text-align: left; 
@@ -54,20 +38,20 @@
             border: none; 
             border-radius: 8px; 
             transition: background 0.3s ease, transform 0.2s;
-            font-size: 14px;
+            font-size: 16px;
         }
         .sidebar button:hover { 
             background-color: rgba(255, 255, 255, 0.3); 
             transform: scale(1.05);
         }
         .content { 
-            width: 85%; 
+            width: 80%; 
             text-align: center; 
             padding: 30px; 
         }
         .video-container { 
             display: grid; 
-            grid-template-columns: repeat(5, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(4, 1fr); 
             gap: 15px;
             justify-content: center;
         }
@@ -80,10 +64,10 @@
         }
         .video-item:hover { 
             transform: scale(1.03); 
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
-        .video-title { font-weight: bold; margin-bottom: 10px; font-size: 14px; max-height: 40px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: black; }
-        .video-tags { font-size: 0.9em; color: black; margin-top: 10px; }
+        .video-title { font-weight: bold; margin-bottom: 10px; font-size: 18px; color: #243B55; }
+        .video-tags { font-size: 0.9em; color: #333; margin-top: 10px; }
         .search-container { margin-bottom: 20px; }
         .search-container input { 
             padding: 12px; 
@@ -99,13 +83,13 @@
         .search-container input:focus {
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
         }
-        iframe { width: 100%; height: 180px; border-radius: 5px; max-width: 100%; }
+        iframe { width: 100%; height: 200px; border-radius: 5px; max-width: 400px; }
         .top-right-logo {
             position: absolute;
-            top: 15px;
+            top: 10px;
             right: 20px;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             transition: transform 0.3s ease;
         }
@@ -115,37 +99,25 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
-            <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
-        </a>
+    <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
+        <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
+    </a>
+    <div class="sidebar">
+        <h2>Topics</h2>
+        <div id="topicList"></div>
     </div>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Topics</h2>
-            <div id="topicList"></div>
+    <div class="content">
+        <h1>Inner Work Stories</h1>
+        <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
         </div>
-        <div class="content">
-            <h1>Inner Work Stories</h1>
-            <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
-            </div>
-            <div class="video-container" id="videoList"></div>
-        </div>
+        <div class="video-container" id="videoList"></div>
     </div>
     <script>
-        const videos = [
-            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" },
-            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" },
-            { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
-        ];
-        
         function displayVideos(videoArray) {
             const videoList = document.getElementById("videoList");
             videoList.innerHTML = "";
-            
-            videoArray.sort((a, b) => new Date(b.date) - new Date(a.date)); // Show latest videos first
             
             videoArray.forEach(video => {
                 let videoItem = document.createElement("div");
@@ -188,13 +160,24 @@
         }
 
         function loadVideos(topic) {
-            const filteredVideos = videos.filter(video => video.tags.includes(topic));
+            console.log("Loading videos for topic:", topic);
+            const allVideos = [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
+            ];
+            const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
             displayVideos(filteredVideos);
         }
 
         window.onload = function() {
             displayTopics();
-            displayVideos(videos);
+            const allVideos = [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
+            ];
+            displayVideos(allVideos);
         };
     </script>
 </body>
