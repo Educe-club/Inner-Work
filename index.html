@@ -135,12 +135,12 @@
         loadVideos(topic);
     } else {
         let allVideos = [];
-        let uniqueUrls = new Set(); // Use a set to prevent duplicates
+        let uniqueTitles = new Set(); // Use a set to prevent duplicates based on title
         
         Object.values(videos).forEach(videoList => {
             videoList.forEach(video => {
-                if (!uniqueUrls.has(video.url)) {
-                    uniqueUrls.add(video.url);
+                if (!uniqueTitles.has(video.title)) {
+                    uniqueTitles.add(video.title);
                     allVideos.push(video);
                 }
             });
