@@ -105,7 +105,7 @@
                 
                 let tags = document.createElement("div");
                 tags.classList.add("video-tags");
-                tags.innerText = "Tags: " + video.tags.join(", ");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos(\"${tag}\")'>${tag}</a>`).join(", ");
                 
                 videoItem.appendChild(title);
                 videoItem.appendChild(iframe);
@@ -134,7 +134,10 @@
     if (topic && videos[topic]) {
         loadVideos(topic);
     } else {
-        let allVideos = Object.values(videos).flat(); // Combine all videos from all topics
+        let allVideos = [];
+        Object.values(videos).forEach(videoList => {
+            allVideos = allVideos.concat(videoList);
+        });
         displayVideos(allVideos); // Display all videos on initial load
     }
 };
