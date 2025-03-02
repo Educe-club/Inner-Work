@@ -77,12 +77,12 @@
             "Leveling Up": [    
                 { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
             ],
-             "Trauma Wounds": [    
-                { title: “Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?”, url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
+            "Trauma Wounds": [    
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
             ],
             "Poetry": [    
-                { title: “Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?”, url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
-           ]
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
+            ]
         };
         
         function loadVideos(topic) {
@@ -111,7 +111,7 @@
                 
                 let tags = document.createElement("div");
                 tags.classList.add("video-tags");
-                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos(\"${tag}\")'>${tag}</a>`).join(", ");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
                 
                 videoItem.appendChild(title);
                 videoItem.appendChild(iframe);
@@ -120,40 +120,12 @@
             });
         }
         
-        function displayTopics() {
-            const topicList = document.getElementById("topicList");
-            topicList.innerHTML = "";
-            let topics = Object.keys(videos).sort();
-            topics.forEach(topic => {
-                let button = document.createElement("button");
-                button.innerText = topic;
-                button.onclick = () => loadVideos(topic);
-                topicList.appendChild(button);
-            });
-        }
-
         window.onload = function() {
-    displayTopics();
-    const urlParams = new URLSearchParams(window.location.search);
-    const topic = urlParams.get("topic");
-
-    if (topic && videos[topic]) {
-        loadVideos(topic);
-    } else {
-        let allVideos = [];
-        let uniqueTitles = new Set(); // Use a set to prevent duplicates based on title
-        
-        Object.values(videos).forEach(videoList => {
-            videoList.forEach(video => {
-                if (!uniqueTitles.has(video.title)) {
-                    uniqueTitles.add(video.title);
-                    allVideos.push(video);
-                }
-            });
-        });
-        displayVideos(allVideos); // Display all unique videos on initial load
-    }
-};
+            displayTopics();
+            const allVideos = new Map();
+            Object.values(videos).flat().forEach(video => allVideos.set(video.title, video));
+            displayVideos(Array.from(allVideos.values()));
+        };
     </script>
 </body>
 </html>
