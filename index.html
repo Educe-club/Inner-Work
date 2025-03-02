@@ -119,13 +119,29 @@
                 videoList.appendChild(videoItem);
             });
         }
-        
-        window.onload = function() {
-            displayTopics();
-            const allVideos = new Map();
-            Object.values(videos).flat().forEach(video => allVideos.set(video.title, video));
-            displayVideos(Array.from(allVideos.values()));
-        };
+       window.onload = function() {
+    displayTopics();
+    const urlParams = new URLSearchParams(window.location.search);
+    const topic = urlParams.get("topic");
+
+    if (topic && videos[topic]) {
+        loadVideos(topic);
+    } else {
+        let allVideos = [];
+        let uniqueUrls = new Set(); // Prevent duplicate videos by URL instead of title
+
+        Object.values(videos).forEach(videoList => {
+            videoList.forEach(video => {
+                if (!uniqueUrls.has(video.url)) {
+                    uniqueUrls.add(video.url);
+                    allVideos.push(video);
+                }
+            });
+        });
+
+        displayVideos(allVideos); // Display all unique videos on initial load
+    }
+};
     </script>
 </body>
 </html>
