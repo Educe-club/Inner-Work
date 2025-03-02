@@ -111,5 +111,71 @@
         </div>
         <div class="video-container" id="videoList"></div>
     </div>
+    <script>
+        function displayVideos(videoArray) {
+            const videoList = document.getElementById("videoList");
+            videoList.innerHTML = "";
+            
+            videoArray.forEach(video => {
+                let videoItem = document.createElement("div");
+                videoItem.classList.add("video-item");
+                
+                let title = document.createElement("div");
+                title.classList.add("video-title");
+                title.innerText = video.title;
+                
+                let iframe = document.createElement("iframe");
+                iframe.src = video.url;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                let tags = document.createElement("div");
+                tags.classList.add("video-tags");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
+                
+                videoItem.appendChild(title);
+                videoItem.appendChild(iframe);
+                videoItem.appendChild(tags);
+                videoList.appendChild(videoItem);
+            });
+        }
+
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+            topics.sort(); // Sort topics alphabetically
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic;
+                button.onclick = function() {
+                    loadVideos(topic);
+                };
+                button.style.cursor = "pointer";
+                topicList.appendChild(button);
+            });
+        }
+
+        function loadVideos(topic) {
+            console.log("Loading videos for topic:", topic);
+            const allVideos = [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
+            ];
+            const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
+            displayVideos(filteredVideos);
+        }
+
+        window.onload = function() {
+            displayTopics();
+            const allVideos = [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
+                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
+            ];
+            displayVideos(allVideos);
+        };
+    </script>
 </body>
 </html>
