@@ -80,7 +80,7 @@
             "Trauma Wounds": [    
                 { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
             ],
-            Poetry: [    
+            "Poetry": [    
                 { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
             ]
         };
@@ -119,7 +119,8 @@
                 videoList.appendChild(videoItem);
             });
         }
-       window.onload = function() {
+        
+        window.onload = function() {
     displayTopics();
     const urlParams = new URLSearchParams(window.location.search);
     const topic = urlParams.get("topic");
@@ -128,8 +129,8 @@
         loadVideos(topic);
     } else {
         let allVideos = [];
-        let uniqueUrls = new Set(); // Prevent duplicate videos by URL instead of title
-
+        let uniqueUrls = new Set(); // Prevent duplicate videos based on URL
+        
         Object.values(videos).forEach(videoList => {
             videoList.forEach(video => {
                 if (!uniqueUrls.has(video.url)) {
@@ -138,8 +139,12 @@
                 }
             });
         });
-
-        displayVideos(allVideos); // Display all unique videos on initial load
+        
+        if (allVideos.length > 0) {
+            displayVideos(allVideos); // Display all unique videos on initial load
+        } else {
+            document.getElementById("videoList").innerHTML = "<p>No videos available.</p>";
+        }
     }
 };
     </script>
