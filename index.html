@@ -64,100 +64,80 @@
     </div>
 
     <script>
-    const videos = {
-        Wellness: [
-            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
-        ],
-        Awareness: [
-            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
-        ],
-        Transformation: [    
-            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
-        ],
-        "Leveling Up": [    
-            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
-        ]
-    };
-    
-    function loadVideos(topic) {
-        console.log("Loading videos for topic:", topic);
-        if (videos[topic]) {
-            displayVideos(videos[topic]);
+        const videos = {
+            Wellness: [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+            ],
+            Awareness: [
+                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+            ],
+            Transformation: [    
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
+            ],
+            "Leveling Up": [    
+                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
+            ]
+        };
+        
+        function loadVideos(topic) {
             history.pushState({ topic }, "", `?topic=${topic}`);
-        } else {
-            console.error("No videos found for topic:", topic);
+            displayVideos(videos[topic]);
         }
-    }
-
-    function displayVideos(videoArray) {
-        const videoList = document.getElementById("videoList");
-        videoList.innerHTML = "";
-
-        if (!videoArray || videoArray.length === 0) {
-            videoList.innerHTML = "<p>No videos available for this category.</p>";
-            return;
+        
+        function displayVideos(videoArray) {
+            const videoList = document.getElementById("videoList");
+            videoList.innerHTML = "";
+            
+            videoArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            videoArray.forEach(video => {
+                let videoItem = document.createElement("div");
+                videoItem.classList.add("video-item");
+                
+                let title = document.createElement("div");
+                title.classList.add("video-title");
+                title.innerText = video.title;
+                
+                let iframe = document.createElement("iframe");
+                iframe.src = video.url;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                let tags = document.createElement("div");
+                tags.classList.add("video-tags");
+                tags.innerText = "Tags: " + video.tags.join(", ");
+                
+                videoItem.appendChild(title);
+                videoItem.appendChild(iframe);
+                videoItem.appendChild(tags);
+                videoList.appendChild(videoItem);
+            });
+        }
+        
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = Object.keys(videos).sort();
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic;
+                button.onclick = () => loadVideos(topic);
+                topicList.appendChild(button);
+            });
         }
 
-        videoArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+        window.onload = function() {
+    displayTopics();
+    const urlParams = new URLSearchParams(window.location.search);
+    const topic = urlParams.get("topic");
 
-        videoArray.forEach(video => {
-            let videoItem = document.createElement("div");
-            videoItem.classList.add("video-item");
-
-            let title = document.createElement("div");
-            title.classList.add("video-title");
-            title.innerText = video.title;
-
-            let iframe = document.createElement("iframe");
-            iframe.src = video.url;
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-            iframe.allowFullscreen = true;
-
-            let tags = document.createElement("div");
-            tags.classList.add("video-tags");
-            tags.innerText = "Tags: " + video.tags.join(", ");
-
-            videoItem.appendChild(title);
-            videoItem.appendChild(iframe);
-            videoItem.appendChild(tags);
-            videoList.appendChild(videoItem);
-        });
-
-        console.log("Videos displayed:", videoArray.length);
+    if (topic && videos[topic]) {
+        loadVideos(topic);
+    } else {
+        let allVideos = Object.values(videos).flat(); // Combine all videos from all topics
+        displayVideos(allVideos); // Display all videos on initial load
     }
-
-    function displayTopics() {
-        const topicList = document.getElementById("topicList");
-        topicList.innerHTML = "";
-        let topics = Object.keys(videos).sort();
-
-        topics.forEach(topic => {
-            let button = document.createElement("button");
-            button.innerText = topic;
-            button.onclick = () => loadVideos(topic);
-            topicList.appendChild(button);
-        });
-
-        console.log("Topics displayed:", topics.length);
-    }
-
-    window.onload = function() {
-        displayTopics();
-        const urlParams = new URLSearchParams(window.location.search);
-        const topic = urlParams.get("topic");
-
-        if (topic && videos[topic]) {
-            loadVideos(topic);
-        } else {
-            let firstTopic = Object.keys(videos)[0];
-            if (firstTopic) {
-                displayVideos(videos[firstTopic]); // ✅ Load first topic by default
-            } else {
-                console.error("No topics available to load.");
-            }
-        }
-    };
-</script>
-
+};
+    </script>
 </body>
 </html>
