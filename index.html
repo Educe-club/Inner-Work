@@ -1,143 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inner Work Stories</title>
-    <style>
-        body { font-family: Arial, sans-serif; display: flex; background-color: #f8f9fa; }
-        .sidebar { width: 20%; padding: 20px; background: #343a40; color: white; text-align: left; }
-        .sidebar h2 { text-align: center; }
-        .sidebar button { 
-            display: block; 
-            width: 100%; 
-            padding: 10px; 
-            margin-bottom: 5px; 
-            cursor: pointer; 
-            text-align: left; 
-            background-color: #495057; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-        }
-        .sidebar button:hover { background-color: #6c757d; }
-        .content { width: 80%; text-align: center; padding: 20px; }
-        .video-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 20px;
-        }
-        .video-item { 
-            width: 23%; 
-            background: white; 
-            padding: 15px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-        .video-item:hover { transform: scale(1.05); }
-        .video-title { font-weight: bold; margin-bottom: 10px; font-size: 16px; }
-        .video-tags { font-size: 0.9em; color: gray; margin-top: 10px; }
-        .search-container { margin-bottom: 20px; }
-        .search-container input { 
-            padding: 10px; 
-            width: 60%; 
-            border-radius: 5px; 
-            border: 1px solid #ced4da;
-        }
-        iframe { width: 100%; height: 200px; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <div class="sidebar">
-        <h2>Topics</h2>
-        <div id="topicList"></div>
-    </div>
-    <div class="content">
-        <h1 style="color: #343a40;">Inner Work Stories</h1>
-        <h2 style="color: #6c757d; font-weight: normal;">Real stories of transformation and personal growth through inner work.</h2>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
-        </div>
-        <div class="video-container" id="videoList"></div>
-    </div>
-
-    <script>
-        const videos = {
-            Wellness: [
-                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
-            ],
-            Awareness: [
-                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
-            ],
-            Transformation: [    
-                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
-            ],
-            "Leveling Up": [    
-                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
-            ]
-        };
-        
-        function loadVideos(topic) {
-            history.pushState({ topic }, "", `?topic=${topic}`);
+<script>
+    const videos = {
+        Wellness: [
+            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+        ],
+        Awareness: [
+            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+        ],
+        Transformation: [    
+            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
+        ],
+        "Leveling Up": [    
+            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
+        ]
+    };
+    
+    function loadVideos(topic) {
+        console.log("Loading videos for topic:", topic);
+        if (videos[topic]) {
             displayVideos(videos[topic]);
+            history.pushState({ topic }, "", `?topic=${topic}`);
+        } else {
+            console.error("No videos found for topic:", topic);
         }
-        
-        function displayVideos(videoArray) {
-            const videoList = document.getElementById("videoList");
-            videoList.innerHTML = "";
-            
-            videoArray.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            videoArray.forEach(video => {
-                let videoItem = document.createElement("div");
-                videoItem.classList.add("video-item");
-                
-                let title = document.createElement("div");
-                title.classList.add("video-title");
-                title.innerText = video.title;
-                
-                let iframe = document.createElement("iframe");
-                iframe.src = video.url;
-                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                iframe.allowFullscreen = true;
-                
-                let tags = document.createElement("div");
-                tags.classList.add("video-tags");
-                tags.innerText = "Tags: " + video.tags.join(", ");
-                
-                videoItem.appendChild(title);
-                videoItem.appendChild(iframe);
-                videoItem.appendChild(tags);
-                videoList.appendChild(videoItem);
-            });
-        }
-        
-        function displayTopics() {
-            const topicList = document.getElementById("topicList");
-            topicList.innerHTML = "";
-            let topics = Object.keys(videos).sort();
-            topics.forEach(topic => {
-                let button = document.createElement("button");
-                button.innerText = topic;
-                button.onclick = () => loadVideos(topic);
-                topicList.appendChild(button);
-            });
+    }
+
+    function displayVideos(videoArray) {
+        const videoList = document.getElementById("videoList");
+        videoList.innerHTML = "";
+
+        if (!videoArray || videoArray.length === 0) {
+            videoList.innerHTML = "<p>No videos available for this category.</p>";
+            return;
         }
 
-        window.onload = function() {
-            displayTopics();
-            const urlParams = new URLSearchParams(window.location.search);
-            const topic = urlParams.get("topic");
+        videoArray.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            if (topic && videos[topic]) {
-                loadVideos(topic);
+        videoArray.forEach(video => {
+            let videoItem = document.createElement("div");
+            videoItem.classList.add("video-item");
+
+            let title = document.createElement("div");
+            title.classList.add("video-title");
+            title.innerText = video.title;
+
+            let iframe = document.createElement("iframe");
+            iframe.src = video.url;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+
+            let tags = document.createElement("div");
+            tags.classList.add("video-tags");
+            tags.innerText = "Tags: " + video.tags.join(", ");
+
+            videoItem.appendChild(title);
+            videoItem.appendChild(iframe);
+            videoItem.appendChild(tags);
+            videoList.appendChild(videoItem);
+        });
+
+        console.log("Videos displayed:", videoArray.length);
+    }
+
+    function displayTopics() {
+        const topicList = document.getElementById("topicList");
+        topicList.innerHTML = "";
+        let topics = Object.keys(videos).sort();
+
+        topics.forEach(topic => {
+            let button = document.createElement("button");
+            button.innerText = topic;
+            button.onclick = () => loadVideos(topic);
+            topicList.appendChild(button);
+        });
+
+        console.log("Topics displayed:", topics.length);
+    }
+
+    window.onload = function() {
+        displayTopics();
+        const urlParams = new URLSearchParams(window.location.search);
+        const topic = urlParams.get("topic");
+
+        if (topic && videos[topic]) {
+            loadVideos(topic);
+        } else {
+            let firstTopic = Object.keys(videos)[0];
+            if (firstTopic) {
+                displayVideos(videos[firstTopic]); // ✅ Load first topic by default
             } else {
-                let firstTopic = Object.keys(videos)[0];
-                displayVideos(videos[firstTopic]);
+                console.error("No topics available to load.");
             }
-        };
-    </script>
-</body>
-</html>
+        }
+    };
+</script>
