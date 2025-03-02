@@ -8,9 +8,18 @@
         body { 
             font-family: 'Arial', sans-serif; 
             display: flex; 
-            background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'), linear-gradient(to right, #141E30, #243B55); /* Textured Background with Gradient */
+            background: linear-gradient(to right, #1a1a1a, #333333);
             color: white;
             position: relative;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
         .sidebar {
             width: 20%; 
@@ -46,6 +55,16 @@
             text-align: center; 
             padding: 30px; 
         }
+        .featured-video {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .featured-video iframe {
+            width: 80%;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+        }
         .video-container { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -61,7 +80,7 @@
         }
         .video-item:hover { 
             transform: scale(1.03); 
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
         }
         .video-title { font-weight: bold; margin-bottom: 10px; font-size: 18px; color: #243B55; }
         .video-tags { font-size: 0.9em; color: #333; margin-top: 10px; }
@@ -96,86 +115,22 @@
     </style>
 </head>
 <body>
-    <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
-        <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
-    </a>
-    <div class="sidebar">
-        <h2>Topics</h2>
-        <div id="topicList"></div>
+    <div class="header">
+        <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
+            <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
+        </a>
     </div>
     <div class="content">
         <h1>Inner Work Stories</h1>
         <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
+        <div class="featured-video">
+            <h3>Featured Video</h3>
+            <iframe src="https://www.youtube.com/embed/3d1Rz5JYG4M" allowfullscreen></iframe>
+        </div>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
         </div>
         <div class="video-container" id="videoList"></div>
     </div>
-    <script>
-        function displayVideos(videoArray) {
-            const videoList = document.getElementById("videoList");
-            videoList.innerHTML = "";
-            
-            videoArray.forEach(video => {
-                let videoItem = document.createElement("div");
-                videoItem.classList.add("video-item");
-                
-                let title = document.createElement("div");
-                title.classList.add("video-title");
-                title.innerText = video.title;
-                
-                let iframe = document.createElement("iframe");
-                iframe.src = video.url;
-                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                iframe.allowFullscreen = true;
-                
-                let tags = document.createElement("div");
-                tags.classList.add("video-tags");
-                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
-                
-                videoItem.appendChild(title);
-                videoItem.appendChild(iframe);
-                videoItem.appendChild(tags);
-                videoList.appendChild(videoItem);
-            });
-        }
-
-        function displayTopics() {
-            const topicList = document.getElementById("topicList");
-            topicList.innerHTML = "";
-            let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
-            topics.sort(); // Sort topics alphabetically
-            topics.forEach(topic => {
-                let button = document.createElement("button");
-                button.innerText = topic;
-                button.onclick = function() {
-                    loadVideos(topic);
-                };
-                button.style.cursor = "pointer";
-                topicList.appendChild(button);
-            });
-        }
-
-        function loadVideos(topic) {
-            console.log("Loading videos for topic:", topic);
-            const allVideos = [
-                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
-                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
-                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
-            ];
-            const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
-            displayVideos(filteredVideos);
-        }
-
-        window.onload = function() {
-            displayTopics();
-            const allVideos = [
-                { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
-                { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
-                { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
-            ];
-            displayVideos(allVideos);
-        };
-    </script>
 </body>
 </html>
