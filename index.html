@@ -106,6 +106,9 @@
     </style>
 </head>
 <body>
+    <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
+        <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
+    </a>
     <script>
         function searchVideos() {
             let query = document.getElementById("searchInput").value.toLowerCase();
@@ -116,6 +119,10 @@
             displayVideos(filteredVideos);
         }
     </script>
+    <div class="sidebar">
+        <h2>Topics</h2>
+        <div id="topicList"></div>
+    </div>
     <div class="content">
         <h1>Inner Work Stories</h1>
         <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
@@ -168,7 +175,24 @@
             displayVideos(filteredVideos);
         }
 
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+            topics.sort(); // Sort topics alphabetically
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic;
+                button.onclick = function() {
+                    loadVideos(topic);
+                };
+                button.style.cursor = "pointer";
+                topicList.appendChild(button);
+            });
+        }
+
         window.onload = function() {
+            displayTopics();
             displayVideos(videos);
         };
     </script>
