@@ -116,5 +116,61 @@
             displayVideos(filteredVideos);
         }
     </script>
+    <div class="content">
+        <h1>Inner Work Stories</h1>
+        <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
+        </div>
+        <div class="video-container" id="videoList"></div>
+    </div>
+    <script>
+        const videos = [
+            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" },
+            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" },
+            { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
+        ];
+        
+        function displayVideos(videoArray) {
+            const videoList = document.getElementById("videoList");
+            videoList.innerHTML = "";
+            
+            videoArray.forEach(video => {
+                let videoItem = document.createElement("div");
+                videoItem.classList.add("video-item");
+                
+                let title = document.createElement("div");
+                title.classList.add("video-title");
+                title.innerText = video.title;
+                
+                let iframe = document.createElement("iframe");
+                iframe.src = video.url;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                let tags = document.createElement("div");
+                tags.classList.add("video-tags");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
+                
+                videoItem.appendChild(title);
+                videoItem.appendChild(iframe);
+                videoItem.appendChild(tags);
+                videoList.appendChild(videoItem);
+            });
+        }
+
+        function searchVideos() {
+            let query = document.getElementById("searchInput").value.toLowerCase();
+            let filteredVideos = videos.filter(video =>
+                video.title.toLowerCase().includes(query) ||
+                video.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+            displayVideos(filteredVideos);
+        }
+
+        window.onload = function() {
+            displayVideos(videos);
+        };
+    </script>
 </body>
 </html>
