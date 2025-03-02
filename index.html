@@ -42,13 +42,12 @@
             padding: 30px; 
         }
         .video-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 20px;
+            justify-content: center;
         }
         .video-item { 
-            width: 30%; 
             background: rgba(255, 255, 255, 0.9); 
             padding: 15px; 
             border-radius: 10px; 
@@ -106,7 +105,7 @@
                 
                 let tags = document.createElement("div");
                 tags.classList.add("video-tags");
-                tags.innerText = "Tags: " + video.tags.join(", ");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
                 
                 videoItem.appendChild(title);
                 videoItem.appendChild(iframe);
@@ -115,7 +114,20 @@
             });
         }
 
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic;
+                button.onclick = () => loadVideos(topic);
+                topicList.appendChild(button);
+            });
+        }
+
         window.onload = function() {
+            displayTopics();
             const allVideos = [
                 { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
                 { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
