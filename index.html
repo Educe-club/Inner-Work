@@ -133,5 +133,68 @@
             <div class="video-container" id="videoList"></div>
         </div>
     </div>
+    <script>
+        const videos = [
+            { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" },
+            { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" },
+            { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"], date: "2024-11-09" }
+        ];
+        
+        function displayVideos(videoArray) {
+            const videoList = document.getElementById("videoList");
+            videoList.innerHTML = "";
+            
+            videoArray.sort((a, b) => new Date(b.date) - new Date(a.date)); // Show latest videos first
+            
+            videoArray.forEach(video => {
+                let videoItem = document.createElement("div");
+                videoItem.classList.add("video-item");
+                
+                let title = document.createElement("div");
+                title.classList.add("video-title");
+                title.innerText = video.title;
+                
+                let iframe = document.createElement("iframe");
+                iframe.src = video.url;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                let tags = document.createElement("div");
+                tags.classList.add("video-tags");
+                tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
+                
+                videoItem.appendChild(title);
+                videoItem.appendChild(iframe);
+                videoItem.appendChild(tags);
+                videoList.appendChild(videoItem);
+            });
+        }
+
+        function displayTopics() {
+            const topicList = document.getElementById("topicList");
+            topicList.innerHTML = "";
+            let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+            topics.sort(); // Sort topics alphabetically
+            topics.forEach(topic => {
+                let button = document.createElement("button");
+                button.innerText = topic;
+                button.onclick = function() {
+                    loadVideos(topic);
+                };
+                button.style.cursor = "pointer";
+                topicList.appendChild(button);
+            });
+        }
+
+        function loadVideos(topic) {
+            const filteredVideos = videos.filter(video => video.tags.includes(topic));
+            displayVideos(filteredVideos);
+        }
+
+        window.onload = function() {
+            displayTopics();
+            displayVideos(videos);
+        };
+    </script>
 </body>
 </html>
