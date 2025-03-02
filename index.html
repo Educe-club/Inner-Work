@@ -120,7 +120,19 @@
             });
         }
         
-        window.onload = function() {
+        function displayTopics() {
+    const topicList = document.getElementById("topicList");
+    topicList.innerHTML = "";
+    let topics = Object.keys(videos).sort();
+    topics.forEach(topic => {
+        let button = document.createElement("button");
+        button.innerText = topic;
+        button.onclick = () => loadVideos(topic);
+        topicList.appendChild(button);
+    });
+}
+
+window.onload = function() {
     displayTopics();
     const urlParams = new URLSearchParams(window.location.search);
     const topic = urlParams.get("topic");
