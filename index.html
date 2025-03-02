@@ -65,9 +65,17 @@
 
     <script>
         const videos = {
-    myShorts: [
-        { title: "What’s #triggering the mean monster in you? It might be neglecting your #wellness", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" },
-        { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Level Up", "Transformation"], date: "2024-12-22" }
+    Wellness: [
+        { title: "What’s #triggering the mean monster in you? It might be neglecting your #wellness", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+    ],
+    Awareness: [
+        { title: "What’s #triggering the mean monster in you? It might be neglecting your #wellness", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"], date: "2025-02-19" }
+    ],
+    Transformation: [    
+        { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
+    ],
+    Leveling Up: [    
+        { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"], date: "2024-12-22" }
     ]
 };
         
@@ -121,7 +129,7 @@
         function displayTopics() {
             const topicList = document.getElementById("topicList");
             topicList.innerHTML = "";
-            let topics = Object.keys(videos).sort();
+            let topics = Object.keys(videos).sort(); // Get unique topics
             topics.forEach(topic => {
                 let button = document.createElement("button");
                 button.innerText = topic.charAt(0).toUpperCase() + topic.slice(1);
@@ -138,7 +146,8 @@
             if (topic && videos[topic]) {
                 loadVideos(topic);
             } else {
-                displayVideos(videos["myShorts"]); // Load myShorts by default
+                let firstTopic = Object.keys(videos)[0];  // Get first topic
+        displayVideos(videos[firstTopic]); // Load videos from first topic
             }
         };
     </script>
