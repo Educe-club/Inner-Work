@@ -135,10 +135,17 @@
         loadVideos(topic);
     } else {
         let allVideos = [];
+        let uniqueUrls = new Set(); // Use a set to prevent duplicates
+        
         Object.values(videos).forEach(videoList => {
-            allVideos = allVideos.concat(videoList);
+            videoList.forEach(video => {
+                if (!uniqueUrls.has(video.url)) {
+                    uniqueUrls.add(video.url);
+                    allVideos.push(video);
+                }
+            });
         });
-        displayVideos(allVideos); // Display all videos on initial load
+        displayVideos(allVideos); // Display all unique videos on initial load
     }
 };
     </script>
