@@ -54,6 +54,13 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        displayVideos(allVideos);
+        setTimeout(() => {
+            const videoList = document.getElementById("videoList");
+            if (!videoList) {
+                console.error("Error: #videoList element not found!");
+            } else {
+                displayVideos(allVideos);
+            }
+        }, 500); // Small delay to ensure rendering
     });
 </script>
