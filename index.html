@@ -1,15 +1,18 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         console.log("DOM fully loaded and parsed.");
-        
-        const videoList = document.getElementById("videoList");
 
-        if (!videoList) {
-            console.error("Error: #videoList element not found! Ensure it is present in your HTML.");
-            return;
-        }
+        setTimeout(() => {
+            const videoList = document.getElementById("videoList");
 
-        displayVideos(allVideos);
+            if (!videoList) {
+                console.error("Error: #videoList element not found! Ensure it is present in your HTML.");
+                return;
+            }
+
+            console.log("#videoList element found, initializing videos...");
+            displayVideos(allVideos);
+        }, 200); // Short delay to ensure rendering
     });
 
     let allVideos = [
