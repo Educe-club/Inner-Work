@@ -7,6 +7,12 @@
 
     function displayVideos(videoArray) {
         const videoList = document.getElementById("videoList");
+        
+        if (!videoList) {
+            console.error("Error: #videoList element not found!");
+            return;
+        }
+
         videoList.innerHTML = "";
         
         if (videoArray.length === 0) {
@@ -47,7 +53,7 @@
         displayVideos(filteredVideos);
     }
 
-    window.onload = function() {
+    document.addEventListener("DOMContentLoaded", function() {
         displayVideos(allVideos);
-    };
+    });
 </script>
