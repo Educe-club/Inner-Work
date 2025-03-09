@@ -15,7 +15,7 @@
     .sidebar {
       width: 10%; /* Reduced width */
       padding: 15px; 
-      background-color: #343A40; /* Flat, modern background */
+      background-color: #343A40; /* Modern flat background */
       color: white; 
       text-align: left; 
       border-right: 1px solid #4A4A4A;
@@ -35,15 +35,16 @@
       margin-bottom: 8px; 
       cursor: pointer; 
       text-align: left; 
-      background-color: #3A3F47; /* Modern flat button style */
+      background-color: #3A3F47; /* Button base color */
       color: white; 
       border: none; 
       border-radius: 4px; 
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s;
       font-size: 14px;
     }
     .sidebar button:hover { 
-      background-color: #4A4F57; /* Subtle change on hover */
+      background-color: #4A4F57; /* Fade background color */
+      transform: scale(1.05);  /* Scale up on hover */
     }
     .content { 
       width: 80%; 
