@@ -9,31 +9,26 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'),
-        linear-gradient(to right, #141E30, #243B55);
+                  linear-gradient(to right, #141E30, #243B55);
       color: white;
-      /* Add top padding so content isn’t hidden behind the fixed header */
-      padding-top: 35px;
     }
-    /* Fixed header with a thick black bar */
+    /* Thick header bar with centered title */
     .page-header {
-      position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 35px; /* Approximately one-third of the 100px logo */
+      height: 35px; /* Thick black bar */
       background-color: black;
       display: flex;
-      justify-content: center;
       align-items: center;
-      z-index: 3;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
     }
     .page-header h1 {
       margin: 0;
       font-size: 18px;
-      color: white;
       text-align: center;
     }
-    /* Logo in upper right that will be partially covered by the header */
+    /* Logo positioned in upper right and above header */
     .top-right-logo {
       position: absolute;
       top: 0;
@@ -41,13 +36,13 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
+      z-index: 10; /* Higher than header so it sits on top */
       transition: transform 0.3s ease;
-      z-index: 2; /* Lower than the header so the header covers its top third */
     }
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Sidebar (Topics) starting exactly below the header */
+    /* Topics Sidebar: starts just below the header */
     .sidebar {
       width: 10%;
       padding: 15px;
@@ -57,9 +52,9 @@
       border-right: 1px solid #4A4A4A;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
-      margin-top: 35px; /* Align with bottom of header */
+      margin-top: 35px; /* Starts exactly below header */
       margin-left: 20px;
-      height: calc(100vh - 35px - 20px); /* Adjust height for header and bottom margin */
+      height: calc(100vh - 35px - 20px);
       overflow-y: auto;
     }
     .sidebar h2 {
@@ -86,7 +81,7 @@
       background-color: #4A4F57;
       transform: scale(1.05);
     }
-    /* Content area: Title and subtitle follow the header */
+    /* Main Content: starts below header */
     .content {
       width: 80%;
       text-align: center;
@@ -94,12 +89,12 @@
       margin-top: 35px; /* Align with header bottom */
     }
     .subtitle {
-      font-weight: normal;
       margin-top: 10px;
       font-size: 16px;
+      font-weight: normal;
     }
     .search-container {
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
     .search-container input {
       padding: 12px;
@@ -115,6 +110,7 @@
     .search-container input:focus {
       box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
+    /* Video grid */
     .video-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -152,20 +148,23 @@
   </style>
 </head>
 <body>
-  <!-- Fixed Header with Centered Title -->
+  <!-- Header with centered title -->
   <header class="page-header">
     <h1>Inner Work Stories</h1>
   </header>
-  <!-- Logo in the upper right, partially hidden by the header -->
+  
+  <!-- Logo in upper right (sits on top of header) -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
+  
   <!-- Sidebar (Topics) -->
   <div class="sidebar">
     <h2>Topics</h2>
     <div id="topicList"></div>
   </div>
-  <!-- Main Content -->
+  
+  <!-- Main Content: Subtitle, search bar, and video grid -->
   <div class="content">
     <div class="subtitle">Real stories of transformation and personal growth.</div>
     <div class="search-container">
@@ -173,6 +172,7 @@
     </div>
     <div class="video-container" id="videoList"></div>
   </div>
+  
   <script>
     // Global video list used by all functions
     const allVideos = [
@@ -227,12 +227,11 @@
     
     // Load videos based on topic tags
     function loadVideos(topic) {
-      console.log("Loading videos for topic:", topic);
       const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
       displayVideos(filteredVideos);
     }
     
-    // Search function to filter videos based on the search query
+    // Search function to filter videos based on the query
     function searchVideos() {
       const query = document.getElementById("searchInput").value.toLowerCase();
       const filteredVideos = allVideos.filter(video => 
@@ -244,7 +243,6 @@
     
     window.onload = function() {
       displayTopics();
-      // Display all videos on load
       displayVideos(allVideos);
     };
   </script>
