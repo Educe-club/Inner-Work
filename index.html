@@ -12,15 +12,17 @@
                   linear-gradient(to right, #141E30, #243B55);
       color: white;
     }
-    /* Thick header bar with centered title */
+    /* Fixed header with centered title */
     .page-header {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 35px; /* Thick black bar */
       background-color: black;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       z-index: 1;
     }
     .page-header h1 {
@@ -28,7 +30,7 @@
       font-size: 18px;
       text-align: center;
     }
-    /* Logo positioned in upper right and above header */
+    /* Logo in upper right sits above the header */
     .top-right-logo {
       position: absolute;
       top: 0;
@@ -36,13 +38,21 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      z-index: 10; /* Higher than header so it sits on top */
+      z-index: 10; /* Higher so it overlays the header */
       transition: transform 0.3s ease;
     }
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Topics Sidebar: starts just below the header */
+    /* Main container for sidebar and content */
+    .main-container {
+      display: flex;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 35px; /* Push content below the fixed header */
+    }
+    /* Sidebar (Topics) */
     .sidebar {
       width: 10%;
       padding: 15px;
@@ -52,9 +62,8 @@
       border-right: 1px solid #4A4A4A;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
-      margin-top: 35px; /* Starts exactly below header */
-      margin-left: 20px;
-      height: calc(100vh - 35px - 20px);
+      margin-right: 20px;
+      height: calc(100vh - 35px - 40px); /* Adjust for header and container padding */
       overflow-y: auto;
     }
     .sidebar h2 {
@@ -81,12 +90,12 @@
       background-color: #4A4F57;
       transform: scale(1.05);
     }
-    /* Main Content: starts below header */
+    /* Main content area */
     .content {
       width: 80%;
       text-align: center;
       padding: 30px;
-      margin-top: 35px; /* Align with header bottom */
+      box-sizing: border-box;
     }
     .subtitle {
       margin-top: 10px;
@@ -148,33 +157,36 @@
   </style>
 </head>
 <body>
-  <!-- Header with centered title -->
+  <!-- Fixed header with centered title -->
   <header class="page-header">
     <h1>Inner Work Stories</h1>
   </header>
   
-  <!-- Logo in upper right (sits on top of header) -->
+  <!-- Logo in upper right (overlays the header) -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
   
-  <!-- Sidebar (Topics) -->
-  <div class="sidebar">
-    <h2>Topics</h2>
-    <div id="topicList"></div>
-  </div>
-  
-  <!-- Main Content: Subtitle, search bar, and video grid -->
-  <div class="content">
-    <div class="subtitle">Real stories of transformation and personal growth.</div>
-    <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
+  <!-- Main container for sidebar and content -->
+  <div class="main-container">
+    <!-- Sidebar (Topics) -->
+    <div class="sidebar">
+      <h2>Topics</h2>
+      <div id="topicList"></div>
     </div>
-    <div class="video-container" id="videoList"></div>
+    
+    <!-- Main content area: subtitle, search, and videos -->
+    <div class="content">
+      <div class="subtitle">Real stories of transformation and personal growth.</div>
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
+      </div>
+      <div class="video-container" id="videoList"></div>
+    </div>
   </div>
   
   <script>
-    // Global video list used by all functions
+    // Global video list
     const allVideos = [
       { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
       { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
@@ -225,13 +237,11 @@
       });
     }
     
-    // Load videos based on topic tags
     function loadVideos(topic) {
       const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
       displayVideos(filteredVideos);
     }
     
-    // Search function to filter videos based on the query
     function searchVideos() {
       const query = document.getElementById("searchInput").value.toLowerCase();
       const filteredVideos = allVideos.filter(video => 
