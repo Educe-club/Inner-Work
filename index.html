@@ -44,24 +44,27 @@
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Main container for sidebar and content */
+    /* Main container using grid layout:
+       Left: Topics sidebar (fixed width)
+       Right: Content area (fills remaining space) */
     .main-container {
-      display: flex;
-      margin-top: 35px; /* Push content below fixed header */
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      grid-gap: 20px;
+      margin-top: 35px; /* push content below the header */
       padding: 20px;
       box-sizing: border-box;
       min-height: calc(100vh - 35px);
     }
     /* Sidebar (Topics) */
     .sidebar {
-      width: 200px; /* Fixed width for topics sidebar */
-      padding: 15px;
       background-color: var(--sidebar-bg);
+      padding: 15px;
       border-right: 1px solid #4A4A4A;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
-      margin-right: 20px;
       overflow-y: auto;
+      height: calc(100vh - 35px - 40px); /* account for container padding */
     }
     .sidebar h2 {
       text-align: center;
@@ -89,10 +92,11 @@
     }
     /* Content area */
     .content {
-      flex: 1;
       padding: 30px;
       box-sizing: border-box;
       text-align: center;
+      /* Right padding equal to logo margin (20px) for balanced spacing */
+      padding-right: 20px;
     }
     .page-title {
       font-size: 36px;
@@ -167,14 +171,14 @@
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
   
-  <!-- Main container for sidebar and content -->
+  <!-- Main container: Sidebar (left) and Content (right) -->
   <div class="main-container">
-    <!-- Sidebar (Topics) -->
+    <!-- Topics Sidebar -->
     <div class="sidebar">
       <h2>Topics</h2>
       <div id="topicList"></div>
     </div>
-    <!-- Content area -->
+    <!-- Content Area -->
     <div class="content">
       <div class="page-title">Inner Work Stories</div>
       <div class="subtitle">Real stories of transformation and personal growth.</div>
