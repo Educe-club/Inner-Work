@@ -5,32 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inner Work Stories</title>
   <style>
+    :root {
+      --primary-bg: #141E30;
+      --secondary-bg: #243B55;
+      --accent: #e63946;
+      --sidebar-bg: #343A40;
+      --button-bg: #3A3F47;
+      --button-hover: var(--accent);
+      --text-color: #ffffff;
+    }
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
-      background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'),
-                  linear-gradient(to right, #141E30, #243B55);
-      color: white;
+      background: linear-gradient(to right, var(--primary-bg), var(--secondary-bg));
+      color: var(--text-color);
     }
-    /* Fixed header with centered title */
+    /* Fixed header bar as a decorative element */
     .page-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 35px; /* Thick black bar */
+      height: 35px;
       background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       z-index: 1;
     }
-    .page-header h1 {
-      margin: 0;
-      font-size: 18px;
-      text-align: center;
-    }
-    /* Logo in upper right sits above the header */
+    /* Logo in upper right remains on top of the header */
     .top-right-logo {
       position: absolute;
       top: 0;
@@ -38,32 +38,29 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      z-index: 10; /* Higher so it overlays the header */
+      z-index: 10;
       transition: transform 0.3s ease;
     }
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Main container for sidebar and content */
+    /* Main container for sidebar and content, pushed below the header */
     .main-container {
-      display: flex;
-      width: 100%;
+      margin-top: 35px; /* space for fixed header */
       padding: 20px;
+      display: flex;
       box-sizing: border-box;
-      margin-top: 35px; /* Push content below the fixed header */
     }
-    /* Sidebar (Topics) */
+    /* Sidebar */
     .sidebar {
       width: 10%;
       padding: 15px;
-      background-color: #343A40;
-      color: white;
-      text-align: left;
+      background-color: var(--sidebar-bg);
       border-right: 1px solid #4A4A4A;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
       margin-right: 20px;
-      height: calc(100vh - 35px - 40px); /* Adjust for header and container padding */
+      height: calc(100vh - 35px - 40px);
       overflow-y: auto;
     }
     .sidebar h2 {
@@ -79,28 +76,33 @@
       margin-bottom: 8px;
       cursor: pointer;
       text-align: left;
-      background-color: #3A3F47;
-      color: white;
+      background-color: var(--button-bg);
+      color: var(--text-color);
       border: none;
       border-radius: 4px;
       transition: background-color 0.3s ease, transform 0.2s;
       font-size: 14px;
     }
     .sidebar button:hover {
-      background-color: #4A4F57;
+      background-color: var(--button-hover);
       transform: scale(1.05);
     }
-    /* Main content area */
+    /* Content area with clear hierarchy */
     .content {
       width: 80%;
-      text-align: center;
       padding: 30px;
       box-sizing: border-box;
+      text-align: center;
+    }
+    .page-title {
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 10px;
     }
     .subtitle {
-      margin-top: 10px;
-      font-size: 16px;
-      font-weight: normal;
+      font-size: 18px;
+      margin-bottom: 20px;
     }
     .search-container {
       margin: 20px 0;
@@ -119,7 +121,7 @@
     .search-container input:focus {
       box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
-    /* Video grid */
+    /* Video grid styles */
     .video-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -157,12 +159,10 @@
   </style>
 </head>
 <body>
-  <!-- Fixed header with centered title -->
-  <header class="page-header">
-    <h1>Inner Work Stories</h1>
-  </header>
+  <!-- Fixed decorative header bar -->
+  <header class="page-header"></header>
   
-  <!-- Logo in upper right (overlays the header) -->
+  <!-- Logo in the upper right -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
@@ -174,9 +174,9 @@
       <h2>Topics</h2>
       <div id="topicList"></div>
     </div>
-    
-    <!-- Main content area: subtitle, search, and videos -->
+    <!-- Content area -->
     <div class="content">
+      <div class="page-title">Inner Work Stories</div>
       <div class="subtitle">Real stories of transformation and personal growth.</div>
       <div class="search-container">
         <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
@@ -200,61 +200,4 @@
       videoArray.forEach(video => {
         let videoItem = document.createElement("div");
         videoItem.classList.add("video-item");
-        
-        let title = document.createElement("div");
-        title.classList.add("video-title");
-        title.innerText = video.title;
-        
-        let iframe = document.createElement("iframe");
-        iframe.src = video.url;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        
-        let tags = document.createElement("div");
-        tags.classList.add("video-tags");
-        tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
-        
-        videoItem.appendChild(title);
-        videoItem.appendChild(iframe);
-        videoItem.appendChild(tags);
-        videoList.appendChild(videoItem);
-      });
-    }
-    
-    function displayTopics() {
-      const topicList = document.getElementById("topicList");
-      topicList.innerHTML = "";
-      let topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
-      topics.sort(); // Sort topics alphabetically
-      topics.forEach(topic => {
-        let button = document.createElement("button");
-        button.innerText = topic;
-        button.onclick = function() {
-          loadVideos(topic);
-        };
-        button.style.cursor = "pointer";
-        topicList.appendChild(button);
-      });
-    }
-    
-    function loadVideos(topic) {
-      const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
-      displayVideos(filteredVideos);
-    }
-    
-    function searchVideos() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filteredVideos = allVideos.filter(video => 
-        video.title.toLowerCase().includes(query) ||
-        video.tags.some(tag => tag.toLowerCase().includes(query))
-      );
-      displayVideos(filteredVideos);
-    }
-    
-    window.onload = function() {
-      displayTopics();
-      displayVideos(allVideos);
-    };
-  </script>
-</body>
-</html>
+     
