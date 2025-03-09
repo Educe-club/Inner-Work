@@ -5,151 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inner Work Stories</title>
   <style>
-    body { 
-      font-family: 'Arial', sans-serif; 
-      display: flex; 
-      background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'), 
-                  linear-gradient(to right, #141E30, #243B55);
-      color: white;
-      position: relative;
+    body {
+      font-family: 'Arial', sans-serif;
       margin: 0;
-      padding-top: 20px; /* Space for the top bar */
+      background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'),
+        linear-gradient(to right, #141E30, #243B55);
+      color: white;
+      /* Add top padding so content isn’t hidden behind the fixed header */
+      padding-top: 35px;
     }
-    /* Top Bar Decoration */
-    .top-bar {
-      width: 100%;
+    /* Fixed header with a thick black bar */
+    .page-header {
       position: fixed;
       top: 0;
       left: 0;
-      border-top: 4px solid black;
-      z-index: 1;
+      width: 100%;
+      height: 35px; /* Approximately one-third of the 100px logo */
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
     }
-    .top-bar::after {
-      content: "";
-      display: block;
-      height: 4px;
-      background: linear-gradient(to right, #141E30, #243B55);
+    .page-header h1 {
+      margin: 0;
+      font-size: 18px;
+      color: white;
+      text-align: center;
     }
-    /* Logo remains in the upper right */
+    /* Logo in upper right that will be partially covered by the header */
     .top-right-logo {
       position: absolute;
-      top: 10px;
+      top: 0;
       right: 20px;
       width: 100px;
       height: 100px;
       border-radius: 50%;
       transition: transform 0.3s ease;
-      z-index: 2; /* Ensure it sits above the top bar */
+      z-index: 2; /* Lower than the header so the header covers its top third */
     }
     .top-right-logo:hover {
       transform: scale(1.1);
     }
+    /* Sidebar (Topics) starting exactly below the header */
     .sidebar {
-      width: 10%; 
-      padding: 15px; 
-      background-color: #343A40; 
-      color: white; 
-      text-align: left; 
+      width: 10%;
+      padding: 15px;
+      background-color: #343A40;
+      color: white;
+      text-align: left;
       border-right: 1px solid #4A4A4A;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
-      margin-top: 120px; /* Offset to avoid overlapping top bar and logo */
+      margin-top: 35px; /* Align with bottom of header */
+      margin-left: 20px;
+      height: calc(100vh - 35px - 20px); /* Adjust height for header and bottom margin */
+      overflow-y: auto;
     }
-    .sidebar h2 { 
-      text-align: center; 
+    .sidebar h2 {
+      text-align: center;
       margin-bottom: 15px;
       font-size: 18px;
       font-weight: bold;
     }
-    .sidebar button { 
-      display: block; 
-      width: 100%; 
-      padding: 10px; 
-      margin-bottom: 8px; 
-      cursor: pointer; 
-      text-align: left; 
+    .sidebar button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      text-align: left;
       background-color: #3A3F47;
-      color: white; 
-      border: none; 
-      border-radius: 4px; 
+      color: white;
+      border: none;
+      border-radius: 4px;
       transition: background-color 0.3s ease, transform 0.2s;
       font-size: 14px;
     }
-    .sidebar button:hover { 
+    .sidebar button:hover {
       background-color: #4A4F57;
       transform: scale(1.05);
     }
-    .content { 
-      width: 80%; 
-      text-align: center; 
-      padding: 30px; 
-      margin-top: 120px; /* Align with sidebar */
+    /* Content area: Title and subtitle follow the header */
+    .content {
+      width: 80%;
+      text-align: center;
+      padding: 30px;
+      margin-top: 35px; /* Align with header bottom */
     }
-    .video-container { 
-      display: grid; 
-      grid-template-columns: repeat(4, 1fr); 
-      gap: 15px;
-      justify-content: center;
+    .subtitle {
+      font-weight: normal;
+      margin-top: 10px;
+      font-size: 16px;
     }
-    .video-item { 
-      background: rgba(255, 255, 255, 0.95); 
-      padding: 15px; 
-      border-radius: 10px; 
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s;
+    .search-container {
+      margin-bottom: 20px;
     }
-    .video-item:hover { 
-      transform: scale(1.03); 
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-    .video-title { 
-      font-weight: bold; 
-      margin-bottom: 10px; 
-      font-size: 18px; 
-      color: #243B55; 
-    }
-    .video-tags { 
-      font-size: 0.9em; 
-      color: #333; 
-      margin-top: 10px; 
-    }
-    .search-container { 
-      margin-bottom: 20px; 
-    }
-    .search-container input { 
-      padding: 12px; 
-      width: 60%; 
-      border-radius: 25px; 
+    .search-container input {
+      padding: 12px;
+      width: 60%;
+      border-radius: 25px;
       border: none;
       outline: none;
       text-align: center;
       font-size: 16px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0px 0px 15px rgba(255,255,255,0.2);
     }
     .search-container input:focus {
-      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+      box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
-    iframe { 
-      width: 100%; 
-      height: 200px; 
-      border-radius: 5px; 
-      max-width: 400px; 
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-content: center;
+    }
+    .video-item {
+      background: rgba(255,255,255,0.95);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s;
+    }
+    .video-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .video-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #243B55;
+    }
+    .video-tags {
+      font-size: 0.9em;
+      color: #333;
+      margin-top: 10px;
+    }
+    iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 5px;
+      max-width: 400px;
     }
   </style>
 </head>
 <body>
-  <div class="top-bar"></div>
+  <!-- Fixed Header with Centered Title -->
+  <header class="page-header">
+    <h1>Inner Work Stories</h1>
+  </header>
+  <!-- Logo in the upper right, partially hidden by the header -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
+  <!-- Sidebar (Topics) -->
   <div class="sidebar">
     <h2>Topics</h2>
     <div id="topicList"></div>
   </div>
+  <!-- Main Content -->
   <div class="content">
-    <h1>Inner Work Stories</h1>
-    <h2 style="font-weight: normal;">Real stories of transformation and personal growth.</h2>
+    <div class="subtitle">Real stories of transformation and personal growth.</div>
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
     </div>
@@ -190,7 +208,7 @@
         videoList.appendChild(videoItem);
       });
     }
-
+    
     function displayTopics() {
       const topicList = document.getElementById("topicList");
       topicList.innerHTML = "";
@@ -206,15 +224,15 @@
         topicList.appendChild(button);
       });
     }
-
+    
     // Load videos based on topic tags
     function loadVideos(topic) {
       console.log("Loading videos for topic:", topic);
       const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
       displayVideos(filteredVideos);
     }
-
-    // New search function to filter videos based on the search query
+    
+    // Search function to filter videos based on the search query
     function searchVideos() {
       const query = document.getElementById("searchInput").value.toLowerCase();
       const filteredVideos = allVideos.filter(video => 
@@ -223,7 +241,7 @@
       );
       displayVideos(filteredVideos);
     }
-
+    
     window.onload = function() {
       displayTopics();
       // Display all videos on load
