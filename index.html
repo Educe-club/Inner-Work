@@ -47,7 +47,7 @@
     /* Main container for sidebar and content */
     .main-container {
       display: flex;
-      margin-top: 35px; /* Push content below the fixed header */
+      margin-top: 35px; /* Pushes content below the fixed header */
       padding: 20px;
       box-sizing: border-box;
       min-height: calc(100vh - 35px);
@@ -121,10 +121,10 @@
     .search-container input:focus {
       box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
-    /* Responsive video grid for fitting more videos */
+    /* Video grid configured to display 6 fixed-width columns */
     .video-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(6, 220px);
       gap: 10px;
       justify-content: center;
     }
@@ -154,7 +154,7 @@
       width: 100%;
       height: 150px;
       border-radius: 5px;
-      max-width: 300px;
+      max-width: 220px;
     }
   </style>
 </head>
