@@ -93,10 +93,11 @@
       display: flex;
       flex-direction: column;
     }
-    /* Top section within the Content Area */
+    /* Top section within the Content Area: centered within the right column */
     .top-section {
       text-align: center;
       margin-bottom: 20px;
+      width: 100%;
     }
     .page-title {
       font-size: 36px;
@@ -115,7 +116,7 @@
     }
     .search-container input {
       padding: 12px;
-      width: 60%;
+      width: 40%; /* reduced width */
       border-radius: 25px;
       border: none;
       outline: none;
@@ -173,14 +174,14 @@
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
   
-  <!-- Main container with two columns -->
+  <!-- Main container: Topics Sidebar and Content Area -->
   <div class="main-container">
-    <!-- Left: Topics Sidebar (starts immediately below header) -->
+    <!-- Topics Sidebar -->
     <div class="sidebar">
       <h2>Topics</h2>
       <div id="topicList"></div>
     </div>
-    <!-- Right: Content Area with top section and video grid -->
+    <!-- Content Area (Right Column) -->
     <div class="content-area">
       <div class="top-section">
         <div class="page-title">Inner Work Stories</div>
@@ -188,80 +189,4 @@
         <div class="search-container">
           <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
         </div>
-      </div>
-      <div class="video-container" id="videoList"></div>
-    </div>
-  </div>
-  
-  <script>
-    // Global video list
-    const allVideos = [
-      { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
-      { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
-      { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
-    ];
-    
-    function displayVideos(videoArray) {
-      const videoList = document.getElementById("videoList");
-      videoList.innerHTML = "";
-      videoArray.forEach(video => {
-        const videoItem = document.createElement("div");
-        videoItem.classList.add("video-item");
-        
-        const title = document.createElement("div");
-        title.classList.add("video-title");
-        title.innerText = video.title;
-        
-        const iframe = document.createElement("iframe");
-        iframe.src = video.url;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        
-        const tags = document.createElement("div");
-        tags.classList.add("video-tags");
-        tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
-        
-        videoItem.appendChild(title);
-        videoItem.appendChild(iframe);
-        videoItem.appendChild(tags);
-        videoList.appendChild(videoItem);
-      });
-    }
-    
-    function displayTopics() {
-      const topicList = document.getElementById("topicList");
-      topicList.innerHTML = "";
-      const topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
-      topics.sort();
-      topics.forEach(topic => {
-        const button = document.createElement("button");
-        button.innerText = topic;
-        button.onclick = function() {
-          loadVideos(topic);
-        };
-        button.style.cursor = "pointer";
-        topicList.appendChild(button);
-      });
-    }
-    
-    function loadVideos(topic) {
-      const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
-      displayVideos(filteredVideos);
-    }
-    
-    function searchVideos() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filteredVideos = allVideos.filter(video =>
-        video.title.toLowerCase().includes(query) ||
-        video.tags.some(tag => tag.toLowerCase().includes(query))
-      );
-      displayVideos(filteredVideos);
-    }
-    
-    window.onload = function() {
-      displayTopics();
-      displayVideos(allVideos);
-    };
-  </script>
-</body>
-</html>
+     
