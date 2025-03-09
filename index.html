@@ -44,9 +44,7 @@
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Main container using grid layout:
-       Left: Topics sidebar (fixed width)
-       Right: Content area (fills remaining space) */
+    /* Main container using grid layout: Left: Topics Sidebar; Right: Content */
     .main-container {
       display: grid;
       grid-template-columns: 250px 1fr;
@@ -90,13 +88,15 @@
       background-color: var(--button-hover);
       transform: scale(1.05);
     }
-    /* Content area */
+    /* Content area: center top section and video grid */
     .content {
       padding: 30px;
       box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      /* Right padding equal to logo margin (20px) for balanced spacing */
-      padding-right: 20px;
     }
     .page-title {
       font-size: 36px;
@@ -110,6 +110,9 @@
     }
     .search-container {
       margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
     .search-container input {
       padding: 12px;
@@ -117,7 +120,6 @@
       border-radius: 25px;
       border: none;
       outline: none;
-      text-align: center;
       font-size: 16px;
       background: rgba(255,255,255,0.9);
       box-shadow: 0px 0px 15px rgba(255,255,255,0.2);
@@ -125,12 +127,13 @@
     .search-container input:focus {
       box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
-    /* Video grid configured to display 6 fixed-width columns */
+    /* Video grid: fixed six columns */
     .video-container {
       display: grid;
       grid-template-columns: repeat(6, 220px);
       gap: 10px;
       justify-content: center;
+      width: 100%;
     }
     .video-item {
       background: rgba(255,255,255,0.95);
@@ -163,17 +166,17 @@
   </style>
 </head>
 <body>
-  <!-- Fixed header without text -->
+  <!-- Fixed header (decorative) -->
   <header class="page-header"></header>
   
-  <!-- Logo in the upper right -->
+  <!-- Logo in upper right -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
     <img src="https://yt3.ggpht.com/oYE1y1MZUAo4q14SI9Bh3EzVKQ_E49n3XUGjxsMewr-xik45NSZP3jmhpyMz4OlnMzcGvj4Ivp0=s176-c-k-c0x00ffffff-no-rj" alt="Logo" class="top-right-logo">
   </a>
   
-  <!-- Main container: Sidebar (left) and Content (right) -->
+  <!-- Main container: Topics Sidebar (left) and Content Area (right) -->
   <div class="main-container">
-    <!-- Topics Sidebar -->
+    <!-- Sidebar (Topics) -->
     <div class="sidebar">
       <h2>Topics</h2>
       <div id="topicList"></div>
