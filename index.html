@@ -54,7 +54,7 @@
       box-sizing: border-box;
       min-height: calc(100vh - 35px);
     }
-    /* Sidebar (Topics) */
+    /* Sidebar (Topics) - removed fixed height so content can grow naturally */
     .sidebar {
       background-color: var(--sidebar-bg);
       padding: 15px;
@@ -62,7 +62,6 @@
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
       overflow-y: auto;
-      height: calc(100vh - 35px - 40px); /* adjust for header and padding */
     }
     .sidebar h2 {
       text-align: center;
@@ -116,7 +115,7 @@
     }
     .search-container input {
       padding: 12px;
-      width: 40%; /* reduced width */
+      width: 40%;
       border-radius: 25px;
       border: none;
       outline: none;
@@ -189,4 +188,80 @@
         <div class="search-container">
           <input type="text" id="searchInput" placeholder="Search for videos..." onkeyup="searchVideos()">
         </div>
-     
+      </div>
+      <div class="video-container" id="videoList"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Global video list
+    const allVideos = [
+      { title: "What’s #triggering the mean monster in you?", url: "https://www.youtube.com/embed/3d1Rz5JYG4M", tags: ["Wellness", "Awareness"] },
+      { title: "Transforming into your great man is a layered approach.", url: "https://www.youtube.com/embed/dT-x407XuJA", tags: ["Leveling Up", "Transformation"] },
+      { title: "Retelling our story keeps us in the feedback vs feet forward. How do we de-story w/out destroying?", url: "https://www.youtube.com/embed/gSMIdXkGoEU", tags: ["Trauma Wounds", "Poetry"] }
+    ];
+    
+    function displayVideos(videoArray) {
+      const videoList = document.getElementById("videoList");
+      videoList.innerHTML = "";
+      videoArray.forEach(video => {
+        const videoItem = document.createElement("div");
+        videoItem.classList.add("video-item");
+        
+        const title = document.createElement("div");
+        title.classList.add("video-title");
+        title.innerText = video.title;
+        
+        const iframe = document.createElement("iframe");
+        iframe.src = video.url;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        
+        const tags = document.createElement("div");
+        tags.classList.add("video-tags");
+        tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
+        
+        videoItem.appendChild(title);
+        videoItem.appendChild(iframe);
+        videoItem.appendChild(tags);
+        videoList.appendChild(videoItem);
+      });
+    }
+    
+    function displayTopics() {
+      const topicList = document.getElementById("topicList");
+      topicList.innerHTML = "";
+      const topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+      topics.sort();
+      topics.forEach(topic => {
+        const button = document.createElement("button");
+        button.innerText = topic;
+        button.onclick = function() {
+          loadVideos(topic);
+        };
+        button.style.cursor = "pointer";
+        topicList.appendChild(button);
+      });
+    }
+    
+    function loadVideos(topic) {
+      const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
+      displayVideos(filteredVideos);
+    }
+    
+    function searchVideos() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filteredVideos = allVideos.filter(video =>
+        video.title.toLowerCase().includes(query) ||
+        video.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+      displayVideos(filteredVideos);
+    }
+    
+    window.onload = function() {
+      displayTopics();
+      displayVideos(allVideos);
+    };
+  </script>
+</body>
+</html>
