@@ -8,27 +8,29 @@
     body { 
       font-family: 'Arial', sans-serif; 
       display: flex; 
-      background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'), linear-gradient(to right, #141E30, #243B55);
+      background: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png'),
+                  linear-gradient(to right, #141E30, #243B55);
       color: white;
       position: relative;
       margin: 0;
     }
     .sidebar {
-      width: 10%; /* Reduced width from 15% to 10% */
+      width: 10%; /* Reduced width */
       padding: 20px;
-      background: linear-gradient(135deg, #2b2d42, #8d99ae); /* Modern gradient */
+      background: linear-gradient(135deg, #2b2d42, #8d99ae);
       color: white; 
       text-align: left;
       border-radius: 15px;
       box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
       margin: 10px;
+      border-top: 3px solid #000; /* Added top border for structure */
     }
     .sidebar h2 { 
       text-align: center; 
       margin-bottom: 20px; 
       font-size: 20px;
-      border-bottom: 2px solid rgba(255,255,255,0.5);
-      padding-bottom: 10px;
+      padding-top: 10px; /* Added space for the border */
+      border-top: 1px solid rgba(255,255,255,0.5);
     }
     .sidebar button { 
       display: block;
@@ -113,6 +115,7 @@
       height: 100px;
       border-radius: 50%;
       transition: transform 0.3s ease;
+      border: 3px solid #000; /* Matching black border for integration */
     }
     .top-right-logo:hover {
       transform: scale(1.1);
