@@ -20,7 +20,7 @@
       background: linear-gradient(to right, var(--primary-bg), var(--secondary-bg));
       color: var(--text-color);
     }
-    /* Fixed header bar without text */
+    /* Fixed header bar (decorative) */
     .page-header {
       position: fixed;
       top: 0;
@@ -47,12 +47,12 @@
     /* Main container for sidebar and content */
     .main-container {
       display: flex;
-      margin-top: 35px; /* Pushes content below fixed header */
+      margin-top: 35px; /* Push content below the fixed header */
       padding: 20px;
-      min-height: calc(100vh - 35px);
       box-sizing: border-box;
+      min-height: calc(100vh - 35px);
     }
-    /* Sidebar */
+    /* Sidebar (Topics) */
     .sidebar {
       width: 10%;
       padding: 15px;
@@ -61,7 +61,7 @@
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
       margin-right: 20px;
-      height: calc(100vh - 35px - 40px); /* Adjust for header and container padding */
+      /* Removed fixed height so content can expand naturally */
       overflow-y: auto;
     }
     .sidebar h2 {
@@ -160,7 +160,7 @@
   </style>
 </head>
 <body>
-  <!-- Fixed header bar without text -->
+  <!-- Fixed header without text -->
   <header class="page-header"></header>
   
   <!-- Logo in the upper right -->
@@ -244,4 +244,17 @@
     
     function searchVideos() {
       const query = document.getElementById("searchInput").value.toLowerCase();
-      const filteredVideo
+      const filteredVideos = allVideos.filter(video =>
+        video.title.toLowerCase().includes(query) ||
+        video.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+      displayVideos(filteredVideos);
+    }
+    
+    window.onload = function() {
+      displayTopics();
+      displayVideos(allVideos);
+    };
+  </script>
+</body>
+</html>
