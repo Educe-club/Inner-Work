@@ -20,7 +20,7 @@
       background: linear-gradient(to right, var(--primary-bg), var(--secondary-bg));
       color: var(--text-color);
     }
-    /* Fixed header bar as a decorative element */
+    /* Fixed header bar */
     .page-header {
       position: fixed;
       top: 0;
@@ -29,8 +29,15 @@
       height: 35px;
       background-color: black;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    /* Logo in upper right remains on top of the header */
+    .page-header h1 {
+      margin: 0;
+      font-size: 18px;
+    }
+    /* Logo in upper right */
     .top-right-logo {
       position: absolute;
       top: 0;
@@ -44,11 +51,12 @@
     .top-right-logo:hover {
       transform: scale(1.1);
     }
-    /* Main container for sidebar and content, pushed below the header */
+    /* Main container for sidebar and content */
     .main-container {
-      margin-top: 35px; /* space for fixed header */
-      padding: 20px;
       display: flex;
+      margin-top: 35px; /* Pushes content below fixed header */
+      padding: 20px;
+      min-height: calc(100vh - 35px);
       box-sizing: border-box;
     }
     /* Sidebar */
@@ -60,7 +68,7 @@
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
       border-radius: 8px;
       margin-right: 20px;
-      height: calc(100vh - 35px - 40px);
+      height: calc(100vh - 35px - 40px); /* Adjust for header and container padding */
       overflow-y: auto;
     }
     .sidebar h2 {
@@ -87,9 +95,9 @@
       background-color: var(--button-hover);
       transform: scale(1.05);
     }
-    /* Content area with clear hierarchy */
+    /* Content area */
     .content {
-      width: 80%;
+      flex: 1;
       padding: 30px;
       box-sizing: border-box;
       text-align: center;
@@ -121,7 +129,7 @@
     .search-container input:focus {
       box-shadow: 0px 0px 20px rgba(255,255,255,0.5);
     }
-    /* Video grid styles */
+    /* Video grid */
     .video-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -159,8 +167,10 @@
   </style>
 </head>
 <body>
-  <!-- Fixed decorative header bar -->
-  <header class="page-header"></header>
+  <!-- Fixed header with centered title -->
+  <header class="page-header">
+    <h1>Inner Work Stories</h1>
+  </header>
   
   <!-- Logo in the upper right -->
   <a href="https://www.youtube.com/@11LeavenPodcast" target="_blank">
@@ -196,8 +206,64 @@
     function displayVideos(videoArray) {
       const videoList = document.getElementById("videoList");
       videoList.innerHTML = "";
-      
       videoArray.forEach(video => {
-        let videoItem = document.createElement("div");
+        const videoItem = document.createElement("div");
         videoItem.classList.add("video-item");
-     
+        
+        const title = document.createElement("div");
+        title.classList.add("video-title");
+        title.innerText = video.title;
+        
+        const iframe = document.createElement("iframe");
+        iframe.src = video.url;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        
+        const tags = document.createElement("div");
+        tags.classList.add("video-tags");
+        tags.innerHTML = "Tags: " + video.tags.map(tag => `<a href='#' onclick='loadVideos("${tag}")'>${tag}</a>`).join(", ");
+        
+        videoItem.appendChild(title);
+        videoItem.appendChild(iframe);
+        videoItem.appendChild(tags);
+        videoList.appendChild(videoItem);
+      });
+    }
+    
+    function displayTopics() {
+      const topicList = document.getElementById("topicList");
+      topicList.innerHTML = "";
+      const topics = ["Wellness", "Awareness", "Leveling Up", "Transformation", "Trauma Wounds", "Poetry"];
+      topics.sort();
+      topics.forEach(topic => {
+        const button = document.createElement("button");
+        button.innerText = topic;
+        button.onclick = function() {
+          loadVideos(topic);
+        };
+        button.style.cursor = "pointer";
+        topicList.appendChild(button);
+      });
+    }
+    
+    function loadVideos(topic) {
+      const filteredVideos = allVideos.filter(video => video.tags.includes(topic));
+      displayVideos(filteredVideos);
+    }
+    
+    function searchVideos() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filteredVideos = allVideos.filter(video =>
+        video.title.toLowerCase().includes(query) ||
+        video.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+      displayVideos(filteredVideos);
+    }
+    
+    window.onload = function() {
+      displayTopics();
+      displayVideos(allVideos);
+    };
+  </script>
+</body>
+</html>
